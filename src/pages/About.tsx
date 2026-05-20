@@ -2,21 +2,24 @@ import { motion } from 'framer-motion';
 import { TerminalHeader } from '../components/TerminalHeader';
 import { Typewriter } from '../components/Typewriter';
 import { Calendar, MapPin, Code, Zap } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export const About = () => {
+  const { t } = useLanguage();
+
   const timeline = [
     {
-      year: '2023 - Present',
-      title: 'Freelance DevOps & Cloud Engineer',
-      company: 'Self-Employed',
-      description:
-        'Working on freelance projects focusing on cloud automation, CI/CD, and container orchestration using AWS, Docker, and Kubernetes.',
-      icon: Code,},
+      year: t('about.timeline2023Present'),
+      title: t('about.freelanceDevops'),
+      company: t('about.selfEmployed'),
+      description: t('about.freelanceDesc'),
+      icon: Code,
+    },
     {
-      year: '2019 - 2023',
-      title: 'Computer Science Graduate',
-      company: 'CVR College Of Engineering',
-      description: 'Bachelor\'s degree with focus on software engineering and cloud computing.',
+      year: t('about.timeline2019_2023'),
+      title: t('about.computerScience'),
+      company: t('about.cvrCollege'),
+      description: t('about.computerScienceDesc'),
       icon: Calendar,
     },
   ];
@@ -24,18 +27,18 @@ export const About = () => {
   const philosophyPoints = [
     {
       icon: Zap,
-      title: 'Automation First',
-      description: 'Every manual process should be automated, every deployment should be reproducible.',
+      title: t('about.automationFirst'),
+      description: t('about.automationDesc'),
     },
     {
       icon: Code,
-      title: 'Infrastructure as Code',
-      description: 'Treat infrastructure with the same discipline as application code.',
+      title: t('about.iacTitle'),
+      description: t('about.iacDesc'),
     },
     {
       icon: MapPin,
-      title: 'Cloud Native',
-      description: 'Build for the cloud from day one, embrace containerization and orchestration.',
+      title: t('about.cloudNative'),
+      description: t('about.cloudNativeDesc'),
     },
   ];
 
@@ -43,8 +46,8 @@ export const About = () => {
     <div className="min-h-screen bg-bg-page">
       {/* Terminal Header */}
       <TerminalHeader
-        command="cat about.txt"
-        description="Displaying professional background and technical philosophy"
+        command={t('about.catAbout')}
+        description={t('about.displayingBackground')}
       />
 
       {/* Bio Section */}
@@ -67,26 +70,14 @@ export const About = () => {
                 </div>
                 <div className="space-y-4 text-neutral-200 leading-relaxed">
                   <Typewriter
-                    text="Bonjour — je suis Fandresena ANDRIANIAINA."
+                    text={t('about.hi')}
                     delay={30}
                     className="text-primary-500 font-semibold block mb-4"
                   />
-                  <p>
-                    Développeur Web & Mobile et ingénieur DevOps junior, je conçois des applications performantes
-                    et mets en place les pipelines et l'infrastructure nécessaires pour les rendre fiables en production.
-                  </p>
-                  <p>
-                    J'interviens sur l'automatisation (CI/CD), l'orchestration de conteneurs et l'infrastructure as code
-                    pour garantir des déploiements reproductibles et sécurisés. J'aime connecter développement et
-                    exploitation pour accélérer la livraison tout en maintenant la qualité.
-                  </p>
-                  <p>
-                    Technologies : AWS, Docker, Kubernetes, Terraform, React, Node.js — et une approche orientée
-                    automatisation et tests.
-                  </p>
-                  <p className="text-primary-500 font-medium">
-                    Mon objectif : permettre aux équipes de livrer vite, de façon sûre et maîtrisée.
-                  </p>
+                  <p>{t('about.bio1')}</p>
+                  <p>{t('about.bio2')}</p>
+                  <p>{t('about.bio3')}</p>
+                  <p className="text-primary-500 font-medium">{t('about.myObjective')}</p>
                 </div>
               </div>
             </motion.div>
@@ -101,34 +92,40 @@ export const About = () => {
             >
               <div className="bg-bg-elevated border border-neutral-700 rounded-xl p-6">
                 <h3 className="font-mono text-primary-500 font-semibold mb-4 text-lg">
-                  Quick Stats
+                  {t('about.quickStats')}
                 </h3>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-neutral-400">Experience</span>
-                    <span className="text-primary-500 font-mono">1+ years</span>
+                    <span className="text-neutral-400">{t('about.experience')}</span>
+                    <span className="text-primary-500 font-mono">1+ {t('about.deployed')}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-neutral-400">Cloud Platforms</span>
+                    <span className="text-neutral-400">{t('about.cloudPlatforms')}</span>
                     <span className="text-primary-500 font-mono">AWS, Azure</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-neutral-400">Projects</span>
-                    <span className="text-primary-500 font-mono">7+ deployed</span>
+                    <span className="text-neutral-400">{t('about.projects')}</span>
+                    <span className="text-primary-500 font-mono">7+ {t('about.deployed')}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-neutral-400">Technologies</span>
-                    <span className="text-primary-500 font-mono">19+ mastered</span>
+                    <span className="text-neutral-400">{t('about.technologies')}</span>
+                    <span className="text-primary-500 font-mono">19+ {t('about.mastered')}</span>
                   </div>
                 </div>
               </div>
 
               <div className="bg-bg-elevated border border-neutral-700 rounded-xl p-6">
                 <h3 className="font-mono text-primary-500 font-semibold mb-4 text-lg">
-                  Specializations
+                  {t('about.specializations')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {['Cloud Architecture', 'CI/CD Pipelines', 'Infrastructure as Code', 'Container Orchestration', 'Microservices'].map((skill) => (
+                  {[
+                    t('about.cloudArchitecture'),
+                    t('about.cicdPipelines'),
+                    t('about.infrastructureAsCode'),
+                    t('about.containerOrchestration'),
+                    t('about.microservices'),
+                  ].map((skill) => (
                     <span
                       key={skill}
                       className="px-3 py-1 bg-neutral-800 text-neutral-200 text-sm rounded-md border border-neutral-700 hover:border-primary-500/50 transition-colors"
@@ -154,10 +151,10 @@ export const About = () => {
             className="text-center mb-16"
           >
             <h2 className="font-mono text-3xl md:text-4xl font-bold text-primary-500 mb-4">
-              Career Timeline
+              {t('about.careerTimeline')}
             </h2>
             <p className="text-neutral-400 max-w-2xl mx-auto">
-              My journey from full-stack development to DevOps engineering
+              {t('about.careerTimelineDesc')}
             </p>
           </motion.div>
 
@@ -214,10 +211,10 @@ export const About = () => {
             className="text-center mb-16"
           >
             <h2 className="font-mono text-3xl md:text-4xl font-bold text-primary-500 mb-4">
-              Tech Philosophy
+              {t('about.techPhilosophy')}
             </h2>
             <p className="text-neutral-400 max-w-2xl mx-auto">
-              Core principles that guide my approach to software engineering and DevOps
+              {t('about.techPhilosophyDesc')}
             </p>
           </motion.div>
 

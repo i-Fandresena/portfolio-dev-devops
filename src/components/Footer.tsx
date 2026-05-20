@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
 import { CONTACT } from '../data/portfolio';
+import { useLanguage } from '../context/LanguageContext';
 
 export const Footer = () => {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
@@ -63,20 +65,20 @@ export const Footer = () => {
               <span>copyright.txt</span>
             </div>
             <div className="mt-2 space-y-1 text-xs">
-              <p>© {currentYear} DevOps & Cloud Engineer</p>
-              <p>Built with React, TypeScript, and Cyber Terminal Aesthetic</p>
-              <p className="text-primary-500">Status: Available for opportunities</p>
+              <p>© {currentYear} {t('footer.builtWith')}</p>
+              <p>{t('footer.allRightsReserved')}</p>
+              <p className="text-primary-500">{t('home.readyToDeploy')}</p>
             </div>
           </div>
 
           {/* Tech stack indicator */}
           <div className="flex items-center space-x-4 text-xs font-mono text-neutral-500">
-            <span>Powered by:</span>
+            <span>{t('footer.builtWith')}:</span>
             <div className="flex items-center space-x-2">
               <span className="px-2 py-1 bg-neutral-800 rounded text-primary-500">React</span>
               <span className="px-2 py-1 bg-neutral-800 rounded text-primary-500">TypeScript</span>
               <span className="px-2 py-1 bg-neutral-800 rounded text-primary-500">Tailwind</span>
-              <span className="px-2 py-1 bg-neutral-800 rounded text-primary-500">Three.js</span>
+              <span className="px-2 py-1 bg-neutral-800 rounded text-primary-500">Vite</span>
             </div>
           </div>
         </div>

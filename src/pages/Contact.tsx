@@ -22,23 +22,23 @@ export const Contact = () => {
     const newErrors: Record<string, string> = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = t('contact.name') + ' ' + t('contact.name'); // Using key as fallback
+      newErrors.name = t('contact.name') + ' ' + t('contact.required');
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = t('contact.email');
+      newErrors.email = t('contact.required');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email'; // Can improve with translations
+      newErrors.email = t('contact.invalidEmail');
     }
 
     if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
+      newErrors.subject = t('contact.subject') + ' ' + t('contact.required');
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = t('contact.message');
+      newErrors.message = t('contact.required');
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
+      newErrors.message = t('contact.messageTooShort');
     }
 
     setErrors(newErrors);
@@ -153,8 +153,8 @@ export const Contact = () => {
     <div className="min-h-screen bg-bg-page">
       {/* Terminal Header */}
       <TerminalHeader
-        command="ping contact.server"
-        description="Establishing connection to communication endpoint"
+        command={t('contact.terminal')}
+        description={t('contact.description')}
       />
 
       <section className="py-24">
@@ -171,7 +171,7 @@ export const Contact = () => {
               <div className="bg-bg-surface border border-neutral-700 rounded-xl p-8 shadow-card">
                 <div className="mb-8">
                   <h2 className="font-mono text-2xl font-bold text-primary-500 mb-4">
-                    Send Message
+                    {t('contact.sendMessage')}
                   </h2>
                   <div className="font-mono text-sm text-accent-500">
                     <span>$</span>
@@ -187,10 +187,10 @@ export const Contact = () => {
                   >
                     <CheckCircle size={64} className="text-primary-500 mx-auto mb-4" />
                     <h3 className="font-mono text-xl font-semibold text-primary-500 mb-2">
-                      Message Sent Successfully!
+                      {t('contact.successMessage')}
                     </h3>
                     <Typewriter
-                      text="> Message delivered. Expect response within 24 hours."
+                      text={`> ${t('contact.successMessage')}`}
                       delay={50}
                       className="text-neutral-400 text-sm"
                     />
@@ -201,7 +201,7 @@ export const Contact = () => {
                     <div>
                       <label className="block font-mono text-sm text-accent-500 mb-2">
                         <span className="text-primary-500 mr-2">&gt;</span>
-                        name
+                        {t('contact.name')}
                       </label>
                       <input
                         type="text"
@@ -209,7 +209,7 @@ export const Contact = () => {
                         value={formData.name}
                         onChange={handleChange}
                         className={`w-full bg-bg-elevated border ${errors.name ? 'border-red-500' : 'border-neutral-700'} rounded-md px-4 py-3 text-neutral-200 placeholder-neutral-600 font-mono focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors`}
-                        placeholder="Your full name"
+                        placeholder={t('contact.name')}
                       />
                       {errors.name && (
                         <p className="text-red-500 text-sm mt-2">{errors.name}</p>
@@ -220,7 +220,7 @@ export const Contact = () => {
                     <div>
                       <label className="block font-mono text-sm text-accent-500 mb-2">
                         <span className="text-primary-500 mr-2">&gt;</span>
-                        email
+                        {t('contact.email')}
                       </label>
                       <input
                         type="email"
@@ -228,7 +228,7 @@ export const Contact = () => {
                         value={formData.email}
                         onChange={handleChange}
                         className={`w-full bg-bg-elevated border ${errors.email ? 'border-red-500' : 'border-neutral-700'} rounded-md px-4 py-3 text-neutral-200 placeholder-neutral-600 font-mono focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors`}
-                        placeholder="your.email@example.com"
+                        placeholder={t('contact.email')}
                       />
                       {errors.email && (
                         <p className="text-red-500 text-sm mt-2">{errors.email}</p>
@@ -239,7 +239,7 @@ export const Contact = () => {
                     <div>
                       <label className="block font-mono text-sm text-accent-500 mb-2">
                         <span className="text-primary-500 mr-2">&gt;</span>
-                        subject
+                        {t('contact.subject')}
                       </label>
                       <input
                         type="text"
@@ -247,7 +247,7 @@ export const Contact = () => {
                         value={formData.subject}
                         onChange={handleChange}
                         className={`w-full bg-bg-elevated border ${errors.subject ? 'border-red-500' : 'border-neutral-700'} rounded-md px-4 py-3 text-neutral-200 placeholder-neutral-600 font-mono focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors`}
-                        placeholder="What's this about?"
+                        placeholder={t('contact.subject')}
                       />
                       {errors.subject && (
                         <p className="text-red-500 text-sm mt-2">{errors.subject}</p>
@@ -258,7 +258,7 @@ export const Contact = () => {
                     <div>
                       <label className="block font-mono text-sm text-accent-500 mb-2">
                         <span className="text-primary-500 mr-2">&gt;</span>
-                        message
+                        {t('contact.message')}
                       </label>
                       <textarea
                         name="message"
@@ -266,7 +266,7 @@ export const Contact = () => {
                         onChange={handleChange}
                         rows={6}
                         className={`w-full bg-bg-elevated border ${errors.message ? 'border-red-500' : 'border-neutral-700'} rounded-md px-4 py-3 text-neutral-200 placeholder-neutral-600 font-mono focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-none`}
-                        placeholder="Tell me about your project or inquiry..."
+                        placeholder={t('contact.message')}
                       />
                       {errors.message && (
                         <p className="text-red-500 text-sm mt-2">{errors.message}</p>
@@ -286,12 +286,12 @@ export const Contact = () => {
                       {isSubmitting ? (
                         <div className="flex items-center justify-center space-x-2">
                           <div className="w-5 h-5 border-2 border-neutral-400 border-t-transparent rounded-full animate-spin" />
-                          <span>SENDING...</span>
+                          <span>{t('contact.sending')}</span>
                         </div>
                       ) : (
                         <div className="flex items-center justify-center space-x-2">
                           <Send size={20} />
-                          <span>[ SEND MESSAGE ]</span>
+                          <span>[ {t('contact.sendMessage')} ]</span>
                         </div>
                       )}
                     </button>
@@ -311,7 +311,7 @@ export const Contact = () => {
               {/* Contact Methods */}
               <div className="bg-bg-elevated border border-neutral-700 rounded-xl p-6">
                 <h3 className="font-mono text-lg font-semibold text-primary-500 mb-6">
-                  Contact Methods
+                  {t('contact.getInTouch')}
                 </h3>
                 <div className="space-y-4">
                   {contactMethods.map((method) => {
@@ -334,16 +334,15 @@ export const Contact = () => {
               {/* Availability Status */}
               <div className="bg-bg-elevated border border-neutral-700 rounded-xl p-6">
                 <h3 className="font-mono text-lg font-semibold text-primary-500 mb-6">
-                  Availability Status
+                  {t('contact.getInTouch')}
                 </h3>
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-3 h-3 bg-primary-500 rounded-full animate-pulse" />
-                    <span className="font-mono text-sm text-neutral-200">Available for new projects</span>
+                    <span className="font-mono text-sm text-neutral-200">{t('home.readyToDeploy')}</span>
                   </div>
                   <div className="text-sm text-neutral-400">
-                    <div className="mb-2">Response time: Within 24 hours</div>
-                    <div>Time zone: IST (UTC+5:30)</div>
+                    <div className="mb-2">{t('contact.getInTouchDesc')}</div>
                   </div>
                 </div>
               </div>
@@ -351,7 +350,7 @@ export const Contact = () => {
               {/* Social Links */}
               <div className="bg-bg-elevated border border-neutral-700 rounded-xl p-6">
                 <h3 className="font-mono text-lg font-semibold text-primary-500 mb-6">
-                  Connect With Me
+                  {t('contact.followMe')}
                 </h3>
                 <div className="grid grid-cols-3 gap-4">
                   {socialLinks.map((link) => {
@@ -387,18 +386,18 @@ export const Contact = () => {
             className="bg-bg-surface border border-neutral-700 rounded-xl p-8 font-mono"
           >
             <div className="text-accent-500 mb-4">
-              $ echo "Thank you for visiting!"
+              $ echo "{t('contact.getInTouchDesc')}"
             </div>
             <div className="space-y-2 text-neutral-200">
-              <p>I'm always interested in discussing new opportunities and challenging projects.</p>
+              <p>{t('home.readyToDeployDesc')}</p>
               <p className="text-primary-500">
-                Let's build something amazing together.
+                {t('contact.startProject')}
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-neutral-700 text-sm text-neutral-400">
               <div className="flex items-center justify-center space-x-2">
                 <ExternalLink size={16} />
-                <span>Connection established. Awaiting your message...</span>
+                <span>{t('contact.successMessage')}</span>
               </div>
             </div>
           </motion.div>
