@@ -1,16 +1,19 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ExternalLink, Github, Code2 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import { Grid3DBackground } from '../components/Grid3D';
 import { Typewriter } from '../components/Typewriter';
 import { HERO_CONTENT, SKILLS, PROJECTS } from '../data/portfolio';
 
 export const Home = () => {
+  const { t } = useLanguage();
+  
   const stats = [
-    { label: 'Years Experience', value: '1+' },
-    { label: 'Cloud Platforms', value: '3' },
-    { label: 'Projects Completed', value: '10+' },
-    { label: 'Technologies', value: '19+' },
+    { label: t('home.yearsExperience'), value: '1+' },
+    { label: t('home.cloudPlatforms'), value: '3' },
+    { label: t('home.projectsCompleted'), value: '10+' },
+    { label: t('home.technologies'), value: '19+' },
   ];
 
   const featuredSkills = SKILLS.slice(0, 6);
@@ -32,12 +35,12 @@ export const Home = () => {
             {/* Terminal prompt */}
             <div className="font-mono text-2xl md:text-3xl lg:text-4xl font-bold tracking-wide">
               <span className="text-accent-500 mr-3">$</span>
-              <span className="text-primary-500">whoami</span>
+              <span className="text-primary-500">{t('home.whoami')}</span>
             </div>
 
             {/* Typewriter heading */}
             <div className="font-mono text-4xl md:text-6xl lg:text-8xl font-bold tracking-tight text-primary-500">
-              <Typewriter text="DevOps & Cloud Engineer" delay={80} />
+              <Typewriter text={t('home.devopsEngineer')} delay={80} />
               <span className="terminal-cursor ml-2" />
             </div>
 
@@ -63,14 +66,14 @@ export const Home = () => {
                 className="group inline-flex items-center px-8 py-4 border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-bg-surface transition-all duration-200 font-semibold tracking-wide rounded-lg shadow-glow hover:shadow-card-hover"
               >
                 <Code2 className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                View Projects
+                {t('home.viewProjects')}
               </Link>
               <Link
                 to="/contact"
                 className="group inline-flex items-center px-8 py-4 border-2 border-neutral-600 bg-neutral-800 text-neutral-200 hover:border-primary-500 hover:text-primary-500 transition-all duration-200 font-semibold tracking-wide rounded-lg"
               >
                 <ExternalLink className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                Contact Me
+                {t('home.contactMe')}
               </Link>
             </motion.div>
           </motion.div>
@@ -121,10 +124,10 @@ export const Home = () => {
             className="text-center mb-16"
           >
             <h2 className="font-mono text-3xl md:text-4xl font-bold text-primary-500 mb-4">
-              Featured Technologies
+              {t('home.featuredTechnologies')}
             </h2>
             <p className="text-neutral-400 max-w-2xl mx-auto">
-              A curated selection of the technologies I work with daily to build and deploy scalable systems
+              {t('home.featuredTechnologiesDesc')}
             </p>
           </motion.div>
 
@@ -168,7 +171,7 @@ export const Home = () => {
               to="/skills"
               className="inline-flex items-center text-primary-500 hover:text-primary-400 font-mono font-semibold group"
             >
-              <span className="mr-2">View all skills</span>
+              <span className="mr-2">{t('home.viewAllSkills')}</span>
               <ExternalLink className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
@@ -186,18 +189,17 @@ export const Home = () => {
             className="bg-bg-elevated border border-primary-500/20 p-12 rounded-2xl shadow-glow"
           >
             <h2 className="font-mono text-3xl md:text-4xl font-bold text-primary-500 mb-6">
-              Ready to Deploy Your Vision?
+              {t('home.readyToDeploy')}
             </h2>
             <p className="text-xl text-neutral-200 mb-8 leading-relaxed">
-              Let's build something amazing together. From infrastructure automation to full-stack development, 
-              I'm here to turn your ideas into production reality.
+              {t('home.readyToDeployDesc')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/contact"
                 className="inline-flex items-center justify-center px-8 py-4 bg-primary-500 text-bg-surface font-semibold rounded-lg hover:bg-primary-700 transition-all duration-200 shadow-glow hover:shadow-card-hover"
               >
-                Start a Project
+                {t('home.startProject')}
               </Link>
               <a
                 href="https://github.com/i-Fandresena"
@@ -206,7 +208,7 @@ export const Home = () => {
                 className="inline-flex items-center justify-center px-8 py-4 border-2 border-neutral-600 text-neutral-200 hover:border-primary-500 hover:text-primary-500 font-semibold rounded-lg transition-all duration-200"
               >
                 <Github className="mr-2 h-5 w-5" />
-                View Code
+                {t('home.viewCode')}
               </a>
             </div>
           </motion.div>

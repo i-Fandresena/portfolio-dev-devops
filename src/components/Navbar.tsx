@@ -1,23 +1,29 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Menu, X, ChevronRight, BookOpen, FileText } from 'lucide-react';
+import { Menu, X, ChevronRight, BookOpen, FileText, Globe } from 'lucide-react';
+import { useLanguage, type Language } from '../context/LanguageContext';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { language, setLanguage, t } = useLanguage();
 
   const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
-    { path: '/skills', label: 'Skills' },
-    { path: '/projects', label: 'Projects' },
-    { path: '/blog', label: 'Blog', icon: BookOpen },
-    { path: '/case-studies', label: 'Case Studies', icon: FileText },
-    { path: '/contact', label: 'Contact' },
+    { path: '/', label: t('nav.home') },
+    { path: '/about', label: t('nav.about') },
+    { path: '/skills', label: t('nav.skills') },
+    { path: '/projects', label: t('nav.projects') },
+    { path: '/blog', label: t('nav.blog'), icon: BookOpen },
+    { path: '/case-studies', label: t('nav.caseStudies'), icon: FileText },
+    { path: '/contact', label: t('nav.contact') },
   ];
 
   const isActive = (path: string) => location.pathname === path;
+
+  const toggleLanguage = () => {
+    setLanguage(language === 'fr' ? 'en' : 'fr');
+  };
 
   return (
     <>
@@ -74,6 +80,16 @@ export const Navbar = () => {
                   </Link>
                 );
               })}
+              
+              {/* Language Toggle */}
+              <button
+                onClick={toggleLanguage}
+                className="flex items-center gap-2 px-3 py-2 rounded-md border border-neutral-700 text-neutral-200 hover:text-primary-500 hover:border-primary-500 transition-all duration-200 font-mono text-sm"
+                title={language === 'fr' ? 'Switch to English' : 'Passer au français'}
+              >
+                <Globe size={16} />
+                <span>{language.toUpperCase()}</span>
+              </button>
             </div>
 
             {/* Mobile menu button */}
@@ -132,6 +148,18 @@ export const Navbar = () => {
                   </Link>
                 );
               })}
+              
+              {/* Mobile Language Toggle */}
+              <button
+                onClick={toggleLanguage}
+                className="w-full flex items-center justify-between px-3 py-3 rounded-md text-base font-medium transition-all duration-200 text-neutral-200 hover:text-primary-500 hover:bg-bg-surface border border-neutral-700 hover:border-primary-500"
+              >
+                <div className="flex items-center gap-3">
+                  <Globe size={16} />
+                  <span className="font-mono">{language === 'fr' ? 'English' : 'Français'}</span>
+                </div>
+                <span className="text-primary-500 font-mono">{language.toUpperCase()}</span>
+              </button>
             </div>
           </motion.div>
         )}
